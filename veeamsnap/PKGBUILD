@@ -1,0 +1,36 @@
+# Maintainer: Code Imp  <code_imp@bk.ru>
+
+_pkgbase=veeamsnap
+pkgname=veeamsnap
+pkgver=1.0.0.944
+pkgrel=1
+pkgdesc="Veeam Agent for Linux kernel modules (DKMS)"
+arch=('i686' 'x86_64')
+url="https://www.github.com/veeam/veeamsnap"
+license=('GPL2')
+depends=('dkms')
+conflicts=("${_pkgbase}")
+install=${pkgname}.install
+#source=('veeamsnap.tar.gz'
+source=( "${url}/archive/master.zip"
+        'dkms.conf')
+md5sums=('eb8c5c2af25da114f3840155952bc8f9'
+         'c5ca0388f175e9ed8df5ebaaf0b917c2')
+
+package() {
+  # Install
+  msg2 "pkgdir: "${pkgdir}
+  #msg2 "Starting make install..."
+  #make DESTDIR="${pkgdir}" install
+
+  # Copy dkms.conf
+  install -Dm644 dkms.conf "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+
+  # Set name and version
+  sed -e "s/@_PKGBASE@/${_pkgbase}/" \
+      -e "s/@PKGVER@/${pkgver}/" \
+      -i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+
+  # Copy sources (including Makefile)
+  cp -r ${_pkgbase}-master/source/* "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
+}
