@@ -1,0 +1,37 @@
+# Maintainer: Code Imp  <code_imp@bk.ru>
+#
+_pkgbase=veeam
+pkgname=veeam
+pkgver=1.0.0.944
+pkgrel=1
+pkgdesc="Veeam Agent for Linux"
+arch=('i686' 'x86_64')
+url=http://repository.veeam.com/backup/linux/agent
+license=('Proprietary')
+depends=('fuse' 'rpmextract')
+install=${pkgname}.install
+source=( "${url}/rpm/el/7/x86_64/veeam-1.0.0.944-1.el7.x86_64.rpm" )
+conflicts=("${_pkgbase}")
+md5sums=('3d7fa953c812caa7ee2f3514e1f4c685')
+#
+build() {
+  msg "build..."
+  rpmextract.sh veeam-1.0.0.944-1.el7.x86_64.rpm
+}
+#
+package() {
+  # Install
+  msg2 "package..."
+
+  install -Dm0644 "${srcdir}/etc/veeam/veeam.ini" "${pkgdir}/etc/veeam/veeam.ini"
+  install -Dm0744 "${srcdir}/lib/systemd/system/veeamservice.service" "${pkgdir}/usr/lib/systemd/system/veeamservice.service"
+  install -Dm0744 "${srcdir}/usr/bin/veeam" "${pkgdir}/usr/bin/veeam"
+  install -Dm0744 "${srcdir}/usr/bin/veeamconfig" "${pkgdir}/usr/bin/veeamconfig"
+  install -Dm0744 "${srcdir}/usr/sbin/veeamagent" "${pkgdir}/usr/bin/veeamagent"
+  install -Dm0744 "${srcdir}/usr/sbin/veeamjobman" "${pkgdir}/usr/bin/veeamjobman"
+  install -Dm0744 "${srcdir}/usr/sbin/veeamservice" "${pkgdir}/usr/bin/veeamservice"
+  install -Dm0644 "${srcdir}/usr/share/doc/veeam/copyright" "${pkgdir}/usr/share/doc/veeam/copyright"
+  install -Dm0644 "${srcdir}/usr/share/man/man8/veeamconfig.8" "${pkgdir}/usr/share/man/man8/veeamconfig.8"
+  install -Dm0644 "${srcdir}/usr/share/veeam/lpb_scheme.sql" "${pkgdir}/usr/share/veeam/lpb_scheme.sql"
+  install -Dm0644 "${srcdir}/usr/share/veeam/lpb_upgrade_scheme.sql" "${pkgdir}/usr/share/veeam/lpb_upgrade_scheme.sql"
+}
