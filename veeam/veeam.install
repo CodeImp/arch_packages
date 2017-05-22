@@ -1,5 +1,6 @@
 post_install() {
     echo "post install"
+    groupadd veeam
     _curr_dir=$(pwd)
     cd /usr/lib
     sudo ln -s libncursesw.so.6 libncursesw.so.5
