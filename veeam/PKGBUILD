@@ -2,7 +2,7 @@
 #
 _pkgbase=veeam
 pkgname=veeam
-pkgver=1.0.1.364
+pkgver=2.0.0.400
 pkgrel=1
 pkgdesc="Veeam Agent for Linux"
 arch=('x86_64')
@@ -10,13 +10,13 @@ url=http://repository.veeam.com/backup/linux/agent
 license=('Proprietary')
 depends=('fuse' 'rpmextract')
 install=${pkgname}.install
-source=( "${url}/rpm/el/7/x86_64/veeam-1.0.1.364-1.el7.x86_64.rpm" )
+source=( "${url}/rpm/el/7/x86_64/veeam-${pkgver}-1.el7.x86_64.rpm" )
 conflicts=("${_pkgbase}")
-md5sums=('995abeb7c95a1d236352f3c3b8101cd8')
+md5sums=('19b04cf15973629984c8f5cf3140b13c')
 #
 build() {
   msg "build..."
-  rpmextract.sh veeam-1.0.1.364-1.el7.x86_64.rpm
+  rpmextract.sh veeam-${pkgver}-1.el7.x86_64.rpm
 }
 #
 package() {
