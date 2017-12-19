@@ -2,7 +2,7 @@
 
 _pkgbase=veeamsnap
 pkgname=veeamsnap
-pkgver=1.0.1.364
+pkgver=2.0.0.400
 pkgrel=1
 pkgdesc="Veeam Agent for Linux kernel modules (DKMS)"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ install=${pkgname}.install
 #source=('veeamsnap.tar.gz'
 source=( "${url}/archive/master.zip"
         'dkms.conf')
-md5sums=('94ccdcdef86cf7547fd0e78ffb802794'
+md5sums=('47b92f4c5b9360c9d6cc178957d45bf3'
          'c5ca0388f175e9ed8df5ebaaf0b917c2')
 
 package() {
