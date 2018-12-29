@@ -2,7 +2,7 @@
 
 _pkgbase=veeamsnap
 pkgname=veeamsnap
-pkgver=2.0.0.400
+pkgver=3.0.0.865
 pkgrel=1
 pkgdesc="Veeam Agent for Linux kernel modules (DKMS)"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ install=${pkgname}.install
 #source=('veeamsnap.tar.gz'
 source=( "${url}/archive/master.zip"
         'dkms.conf')
-md5sums=('47b92f4c5b9360c9d6cc178957d45bf3'
+md5sums=('825d985806cd0796a84d14d41c024093'
          'c5ca0388f175e9ed8df5ebaaf0b917c2')
 
 package() {
@@ -30,6 +30,10 @@ package() {
   sed -e "s/@_PKGBASE@/${_pkgbase}/" \
       -e "s/@PKGVER@/${pkgver}/" \
       -i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+  
+  #hot fix for gcc 8.2
+  sed -e "s/inline/\/*inline*\//" \
+      -i ${_pkgbase}-master/source/log_format.h
 
   # Copy sources (including Makefile)
   cp -r ${_pkgbase}-master/source/* "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
