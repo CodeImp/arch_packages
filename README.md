@@ -1,3 +1,8 @@
+#WARNING
+Packages moved to AUR and will not be more supported here.</br>
+New place here:</br>
+https://aur.archlinux.org/packages/veeamsnap/ </br>
+https://aur.archlinux.org/packages/veeam/ </br>
 # arch_packages
 Arch Linux PKGBUILD for Veeam Agent for Linux</br>
 Version: 3.0.0.865</br>
